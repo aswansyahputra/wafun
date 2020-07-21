@@ -11,17 +11,17 @@ library(janitor)
 
 # Adjust data format for modeling -----------------------------------------
 
-wachats_prep <- 
-  wachats_features %>% 
-  drop_na(author) %>% 
-  group_by(author) %>% 
+wachats_prep <-
+  wachats_features %>%
+  drop_na(author) %>%
+  group_by(author) %>%
   summarise(
     n_chats = n(),
     across(
       c(hour:any_emoji, n_emojis:n_puncts),
       ~ mean(.x, na.rm = TRUE)
     )
-  ) %>% 
+  ) %>%
   column_to_rownames("author")
 
 glimpse(wachats_prep)
@@ -37,7 +37,7 @@ plot.PCA(wachats_pca, choix = "var")
 
 # Run HCPC ----------------------------------------------------------------
 
-wachats_cluster <- 
+wachats_cluster <-
   HCPC(wachats_pca, nb.clust = -1, graph = FALSE)
 
 plot.HCPC(wachats_cluster, choice = "tree")
@@ -46,19 +46,21 @@ plot.HCPC(wachats_cluster, choice = "map", draw.tree = FALSE)
 
 # Inspect cluster descriptors ---------------------------------------------
 
-wachats_cluster_descriptors <- 
-  wachats_cluster %>% 
-  pluck("desc.var", "quanti") %>% 
+wachats_cluster_descriptors <-
+  wachats_cluster %>%
+  pluck("desc.var", "quanti") %>%
   map_dfr(
-    ~ .x %>% 
-      as_tibble(rownames = "descriptor") %>% 
+    ~ .x %>%
+      as_tibble(rownames = "descriptor") %>%
       clean_names(),
     .id = "cluster"
-  ) %>% 
+  ) %>%
   mutate(cluster = paste("Cluster", cluster))
 
-ggplot(wachats_cluster_descriptors,
-       aes(cluster, descriptor, fill = v_test)) +
+ggplot(
+  wachats_cluster_descriptors,
+  aes(cluster, descriptor, fill = v_test)
+) +
   geom_tile() +
   scale_fill_distiller(
     palette = "Spectral",
@@ -78,6 +80,7 @@ ggplot(wachats_cluster_descriptors,
     grid = FALSE,
     ticks = TRUE
   ) +
-  theme(plot.title.position = "plot",
-        legend.position = "bottom")
-
+  theme(
+    plot.title.position = "plot",
+    legend.position = "bottom"
+  )

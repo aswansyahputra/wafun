@@ -11,7 +11,7 @@ devtools::load_all()
 
 # Load WhatsApp chat data -------------------------------------------------
 
-wachats_raw <- 
+wachats_raw <-
   read_lines("data-raw/wachats_kaggle.txt")
 
 # Inspect the raw data ----------------------------------------------------
@@ -21,8 +21,8 @@ glimpse(wachats_raw)
 # Turn raw data into appropriate format -----------------------------------
 
 wachats <-
-  wachats_raw %>% 
-  enframe(name = NULL, value = "content") %>% 
+  wachats_raw %>%
+  enframe(name = NULL, value = "content") %>%
   # separate(
   #   content,
   #   into = c("datetime", "content"),
@@ -33,38 +33,38 @@ wachats <-
     into = c("datetime", "content"),
     sep = "(?<=\\d{2}/\\d{2}/\\d{4}, \\d{2}:\\d{2}) - ",
     fill = "left"
-  ) %>% 
+  ) %>%
   mutate(
     chatid = case_when(
       !is.na(datetime) ~ row_number(),
       TRUE ~ NA_integer_
     )
-  ) %>% 
-  fill(chatid, datetime) %>% 
-  group_by(chatid) %>% 
+  ) %>%
+  fill(chatid, datetime) %>%
+  group_by(chatid) %>%
   summarise(
     datetime = unique(datetime),
     content = paste0(content, collapse = "\n"),
     n_lines = n()
-  ) %>% 
-  ungroup() %>% 
-  filter(str_detect(content, ":")) %>% 
+  ) %>%
+  ungroup() %>%
+  filter(str_detect(content, ":")) %>%
   separate(
     content,
     into = c("author", "text"),
     sep = ": ",
     extra = "merge"
-  ) %>% 
+  ) %>%
   mutate(
     datetime = dmy_hm(datetime)
-  ) 
-  
+  )
+
 glimpse(wachats)
 
 # Glean some features from text -------------------------------------------
 
-wachats_features <- 
-  wachats %>% 
+wachats_features <-
+  wachats %>%
   mutate(
     hour = hour(datetime),
     day = wday(datetime, week_start = 1),
@@ -86,8 +86,8 @@ wachats_features <-
     n_lowers = n_lowers(text),
     n_urls = n_urls(text),
     n_puncts = n_puncts(text)
-  ) %>% 
-  relocate(n_lines, .before = n_emojis) %>% 
+  ) %>%
+  relocate(n_lines, .before = n_emojis) %>%
   mutate(
     across(
       starts_with("n_"),
