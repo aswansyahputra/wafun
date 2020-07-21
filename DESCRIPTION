@@ -1,0 +1,34 @@
+Package: wafun
+Title: Have fun with WhatsApp
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Muhammad Aswan",
+           family = "Syahputra",
+           role = c("aut", "cre"),
+           email = "muhammadaswansyahputra@gmail.com")
+Description: Compendium for DQLab Data Mentoring webinar.
+License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Imports: 
+    devtools,
+    dplyr,
+    emo,
+    FactoMineR,
+    forcats,
+    ggalt,
+    ggplot2,
+    hrbrthemes,
+    janitor,
+    lubridate,
+    purrr,
+    readr,
+    stringr,
+    textfeatures,
+    tibble,
+    tidyr,
+    wordcloud2
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
