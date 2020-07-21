@@ -41,42 +41,6 @@ wachats_kaggle <-
   ) %>% 
   deframe()
   
-# wachats_kaggle <- 
-  # wachats_kaggle_raw %>% 
-  # str_replace(pattern = "(?<=A|P)M:", "M -") %>% 
-  # str_replace("image omitted", "Media omitted") %>% 
-  # str_replace("video omitted", "Media omitted") %>% 
-  # enframe(name = NULL, value = "content") %>% 
-  # filter(nchar(content) != 0) %>% 
-  # separate(
-  #   content,
-  #   into = c("datetime", "content"),
-  #   sep = " - ",
-  #   fill = "left"
-  # ) %>% 
-  # mutate(
-  #   chatid = case_when(
-  #     !is.na(datetime) ~ row_number(),
-  #     TRUE ~ NA_integer_
-  #   )
-  # ) %>% 
-  # fill(chatid, datetime) %>% 
-  # group_by(chatid) %>% 
-  # summarise(
-  #   datetime = unique(datetime),
-  #   content = paste0(content, collapse = "\n")
-  # ) %>% 
-  # ungroup() %>% 
-  # mutate(
-  #   datetime = dmy_hms(datetime),
-  #   datetime = format(datetime, format = "%d/%m/%Y, %H:%M")
-  # ) %>% 
-  # drop_na(datetime) %>% 
-  # transmute(
-  #   content = glue("{datetime} - {content}", .na = NULL)
-  # ) %>% 
-  # deframe()
-
 write_lines(wachats_kaggle, "data-raw/wachats_kaggle.txt")
 
 usethis::use_data(wachats_kaggle, overwrite = TRUE, internal = TRUE)
