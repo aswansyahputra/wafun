@@ -13,7 +13,6 @@ library(janitor)
 
 wachats_prep <-
   wachats_features %>%
-  drop_na(author) %>%
   group_by(author) %>%
   summarise(
     n_chats = n(),
@@ -30,7 +29,7 @@ rownames(wachats_prep)
 # Run PCA -----------------------------------------------------------------
 
 wachats_pca <-
-  PCA(wachats_prep)
+  PCA(wachats_prep, graph = FALSE)
 
 plot.PCA(wachats_pca, choix = "ind")
 plot.PCA(wachats_pca, choix = "var")

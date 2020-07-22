@@ -23,11 +23,6 @@ glimpse(wachats_raw)
 wachats <-
   wachats_raw %>%
   enframe(name = NULL, value = "content") %>%
-  # separate(
-  #   content,
-  #   into = c("datetime", "content"),
-  #   sep = " - "
-  # ) %>%
   separate(
     content,
     into = c("datetime", "content"),
@@ -81,7 +76,6 @@ wachats_features <-
     n_commas = n_commas(text),
     n_periods = n_periods(text),
     n_exclaims = n_exclaims(text),
-    n_newlines = n_newlines(text),
     n_caps = n_caps(text),
     n_lowers = n_lowers(text),
     n_urls = n_urls(text),

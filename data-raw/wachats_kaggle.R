@@ -43,4 +43,4 @@ wachats_kaggle <-
 
 write_lines(wachats_kaggle, "data-raw/wachats_kaggle.txt")
 
-usethis::use_data(wachats_kaggle, overwrite = TRUE, internal = TRUE)
+usethis::use_data(wachats_kaggle, overwrite = TRUE)

@@ -29,11 +29,11 @@ wachats_features %>%
   count(
     date = as.Date(datetime)
   ) %>%
-  ggplot(aes(date, n)) +
+  ggplot(aes(x = date, y = n)) +
   geom_line()
 
 wachats_features %>%
-  ggplot(aes(as.Date(datetime))) +
+  ggplot(aes(x = as.Date(datetime))) +
   geom_line(stat = "count", colour = ft_cols$red) +
   labs(
     x = NULL,
@@ -47,7 +47,8 @@ wachats_features %>%
 mostactive <-
   wachats_features %>%
   count(
-    author
+    author,
+    sort = TRUE
   ) %>%
   slice_max(n = 4, order_by = n)
 
