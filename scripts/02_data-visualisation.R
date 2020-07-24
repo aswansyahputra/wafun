@@ -1,13 +1,13 @@
 # Load packages -----------------------------------------------------------
 
-library(dplyr)
-library(lubridate)
-library(tidyr)
-library(forcats)
-library(ggplot2)
-library(ggalt)
-library(hrbrthemes)
-library(wordcloud2)
+library(dplyr)      # CRAN v1.0.0
+library(lubridate)  # CRAN v1.7.9
+library(tidyr)      # CRAN v1.1.0
+library(forcats)    # CRAN v0.5.0
+library(ggplot2)    # CRAN v3.3.2
+library(ggalt)      # CRAN v0.4.0
+library(hrbrthemes) # CRAN v0.8.0
+library(wordcloud2) # CRAN v0.2.1
 
 # Set up plotting themes --------------------------------------------------
 

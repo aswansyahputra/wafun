@@ -1,12 +1,12 @@
 # Load packages -----------------------------------------------------------
 
-library(readr)
-library(dplyr)
-library(tibble)
-library(tidyr)
-library(stringr)
-library(lubridate)
-library(emo)
+library(readr)     # CRAN v1.3.1
+library(dplyr)     # CRAN v1.0.0
+library(tibble)    # CRAN v3.0.3
+library(tidyr)     # CRAN v1.1.0
+library(stringr)   # CRAN v1.4.0
+library(lubridate) # CRAN v1.7.9
+library(emo)       # [github::hadley/emo] v0.0.0.9000
 devtools::load_all()
 
 # Load WhatsApp chat data -------------------------------------------------

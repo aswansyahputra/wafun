@@ -1,13 +1,13 @@
 # Load packages -----------------------------------------------------------
 
-library(dplyr)
-library(tidyr)
-library(tibble)
-library(purrr)
-library(ggplot2)
-library(hrbrthemes)
-library(FactoMineR)
-library(janitor)
+library(dplyr)      # CRAN v1.0.0
+library(tidyr)      # CRAN v1.1.0
+library(tibble)     # CRAN v3.0.3
+library(purrr)      # CRAN v0.3.4
+library(ggplot2)    # CRAN v3.3.2
+library(hrbrthemes) # CRAN v0.8.0
+library(FactoMineR) # CRAN v2.3
+library(janitor)    # CRAN v2.0.1
 
 # Adjust data format for modeling -----------------------------------------
 
