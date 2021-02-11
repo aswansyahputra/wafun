@@ -28,13 +28,13 @@ theme_set(
 wachats_features %>%
   count(
     date = as.Date(datetime)
-  ) %>%
+  ) %>% 
   ggplot(aes(x = date, y = n)) +
   geom_line()
 
 wachats_features %>%
   ggplot(aes(x = as.Date(datetime))) +
-  geom_line(stat = "count", colour = ft_cols$red) +
+  geom_line(stat = "count", colour = ft_cols$red) %>% 
   labs(
     x = NULL,
     y = "# chats",
@@ -53,13 +53,13 @@ mostactive <-
   slice_max(n = 4, order_by = n)
 
 wachats_features %>%
-  semi_join(mostactive) %>%
+  semi_join(mostactive) %>% 
   count(
     author,
     hour
-  ) %>%
+  ) %>% 
   mutate(
-    author = fct_reorder(author, n, sum, na.rm = TRUE)
+    author = fct_reorder(author, n, median)
   ) %>%
   ggplot(aes(hour, author, colour = n)) +
   geom_point(size = 8, alpha = 0.7, show.legend = FALSE) +

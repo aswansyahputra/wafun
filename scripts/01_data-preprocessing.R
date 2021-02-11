@@ -22,13 +22,13 @@ glimpse(wachats_raw)
 
 wachats <-
   wachats_raw %>%
-  enframe(name = NULL, value = "content") %>%
+  enframe(name = NULL, value = "content") %>% 
   separate(
     content,
     into = c("datetime", "content"),
     sep = "(?<=\\d{2}/\\d{2}/\\d{4}, \\d{2}:\\d{2}) - ",
     fill = "left"
-  ) %>%
+  ) %>% 
   mutate(
     chatid = case_when(
       !is.na(datetime) ~ row_number(),
@@ -42,14 +42,14 @@ wachats <-
     content = paste0(content, collapse = "\n"),
     n_lines = n()
   ) %>%
-  ungroup() %>%
-  filter(str_detect(content, ":")) %>%
+  ungroup() %>% 
+  filter(str_detect(content, ":")) %>% 
   separate(
     content,
     into = c("author", "text"),
     sep = ": ",
     extra = "merge"
-  ) %>%
+  ) %>% 
   mutate(
     datetime = dmy_hm(datetime)
   )
@@ -80,8 +80,8 @@ wachats_features <-
     n_lowers = n_lowers(text),
     n_urls = n_urls(text),
     n_puncts = n_puncts(text)
-  ) %>%
-  relocate(n_lines, .before = n_emojis) %>%
+  ) %>% 
+  relocate(n_lines, .before = n_emojis) %>% 
   mutate(
     across(
       starts_with("n_"),
